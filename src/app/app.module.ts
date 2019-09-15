@@ -10,6 +10,7 @@ import {ContactsFormComponent} from './contacts/contacts-form/contacts-form.comp
 import {ReactiveFormsModule} from '@angular/forms';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {StorageService} from './contacts/services/storage.service';
+import { ContactsEditComponent } from './contacts/contacts-edit/contacts-edit.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {StorageService} from './contacts/services/storage.service';
     ContactsListComponent,
     ContactsViewComponent,
     ContactsAddComponent,
-    ContactsFormComponent
+    ContactsFormComponent,
+    ContactsEditComponent
   ],
   imports: [
     BrowserModule,
