@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Contact} from '../models/contact';
+import {StorageService} from '../services/storage.service';
 
 @Component({
   selector: 'app-contacts-list',
@@ -9,9 +10,10 @@ import {Contact} from '../models/contact';
 export class ContactsListComponent implements OnInit {
   contacts: Contact[] = [];
 
-  ngOnInit() {
-    this.contacts.push(new Contact('Sebastian', 'Seijo', 'sebastiangseijo@gmail.com', 'ar'));
-    this.contacts.push(new Contact('Micaela', 'Barrio', 'micabarrio@gmail.com', 'ar'));
+  constructor(private storageService: StorageService) {
   }
 
+  ngOnInit() {
+    this.contacts = this.storageService.getContacts();
+  }
 }

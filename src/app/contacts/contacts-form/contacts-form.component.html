@@ -1,27 +1,40 @@
 <div class="contacts-form">
-   <form>
+   <form  [formGroup]="contactForm" (ngSubmit)="submit()">
       <div class="row">
+<!--         First Name       -->
          <div class="col">
             <label for="contact-first-name">First Name</label>
-            <input type="text" class="form-control" id="contact-first-name" placeholder="First Name" required>
+            <input type="text" class="form-control" formControlName="firstName" name="firstName"
+                   id="contact-first-name" placeholder="First Name" required>
          </div>
+         <!--         Last Name       -->
          <div class="col">
             <label for="contact-last-name">Last Name</label>
-            <input type="text" class="form-control" id="contact-last-name" placeholder="Last Name" required>
+            <input type="text" formControlName="lastName" class="form-control" name="lastName"
+                   id="contact-last-name" placeholder="Last Name" required>
          </div>
       </div>
       <div class="row">
+         <!--         Email        -->
          <div class="col">
             <label for="contact-email">Email</label>
-            <input type="text" class="form-control" id="contact-email" placeholder="Email" required>
+            <input type="text" formControlName="email" name="email"
+                   class="form-control" id="contact-email" placeholder="Email" required>
          </div>
+         <!--         Country        -->
          <div class="col">
-            <label for="contact-country">Country</label>
-            <input type="text" class="form-control" id="contact-country" placeholder="Country" required>
+            <label>Country</label>
+            <ng-select [items]="countryList"
+                       bindLabel="country"
+                       name="country"
+                       autofocus
+                       bindValue="id"
+                       formControlName="country">
+            </ng-select>
          </div>
       </div>
       <div class="row">
-         <button type="submit" class="add-button btn btn-success">Submit</button>
+         <button type="submit" [disabled]="!contactForm.valid" class="add-button btn btn-success">Submit</button>
       </div>
    </form>
 </div>
