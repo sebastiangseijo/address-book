@@ -10,7 +10,7 @@ export class StorageService {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }
 
-  getContacts() {
+  getContacts(): Contact[] {
     let contacts: Contact[] = [];
     contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
     return contacts;
