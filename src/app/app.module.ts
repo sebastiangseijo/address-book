@@ -6,7 +6,10 @@ import { AppComponent } from './app.component';
 import { ContactsListComponent } from './contacts/contacts-list/contacts-list.component';
 import {ContactsViewComponent} from './contacts/contacts-view/contacts-view.component';
 import { ContactsAddComponent } from './contacts/contacts-add/contacts-add.component';
-import { ContactsFormComponent } from './contacts/contacts-form/contacts-form.component';
+import {ContactsFormComponent} from './contacts/contacts-form/contacts-form.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {NgSelectModule} from '@ng-select/ng-select';
+import {StorageService} from './contacts/services/storage.service';
 
 @NgModule({
   declarations: [
@@ -18,9 +21,11 @@ import { ContactsFormComponent } from './contacts/contacts-form/contacts-form.co
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    NgSelectModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
