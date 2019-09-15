@@ -34,7 +34,32 @@
          </div>
       </div>
       <div class="row">
+         <button type="button" [hidden]="!contact" data-toggle="modal" data-target="#removeContact"
+                 class="add-button btn btn-danger">Remove Contact</button>
          <button type="submit" [disabled]="!contactForm.valid" class="add-button btn btn-success">Submit</button>
       </div>
    </form>
+
+
+   <!-- Modal -->
+   <div class="modal fade" id="removeContact" tabindex="-1" role="dialog" aria-labelledby="removeContactLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="removeContactLabel">Contact Deletion</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <strong>Are you sure you want to delete {{getComposedName()}} contact profile?</strong>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="button" (click)="removeContact()" data-dismiss="modal" class="btn btn-primary">Save changes</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
 </div>

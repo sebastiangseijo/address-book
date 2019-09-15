@@ -69,4 +69,16 @@ export class ContactsFormComponent implements OnInit {
     this.storageService.setContacts(contacts);
   }
 
+  removeContact(): void {
+    let contacts: Contact[];
+    contacts = this.storageService.getContacts();
+    contacts  = contacts.filter(contact => contact.id !== this.contact.id);
+    this.storageService.setContacts(contacts);
+    this.location.back();
+  }
+
+  getComposedName(): string {
+    return this.contact ? this.contact.firstName + ' ' + this.contact.lastName : '';
+  }
+
 }
