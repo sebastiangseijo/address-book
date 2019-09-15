@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import * as CountryList from 'country-list';
 import {Contact} from '../models/contact';
 import {StorageService} from '../services/storage.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-contacts-form',
@@ -10,34 +11,62 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./contacts-form.component.scss']
 })
 export class ContactsFormComponent implements OnInit {
+  // if editing, contact is passed as a input parameter to avoid code duplication
+  @Input()
+  contact: Contact;
   countryList: string[] = [];
+  contactForm: FormGroup;
 
-  contactForm = new FormGroup({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    country: new FormControl('', Validators.required)
-  });
-
-  constructor(private storageService: StorageService) {
+  constructor(private storageService: StorageService, private location: Location) {
   }
 
   ngOnInit(): void {
     this.countryList = CountryList.getNames();
+    this.contactForm = new FormGroup({
+      firstName: new FormControl(this.contact ? this.contact.firstName : '', Validators.required),
+      lastName: new FormControl(this.contact ? this.contact.lastName : '', Validators.required),
+      email: new FormControl(this.contact ? this.contact.email : '', Validators.required),
+      country: new FormControl(this.contact ? this.contact.country : '', Validators.required)
+    });
   }
 
   submit() {
-    if (this.contactForm.valid) {
-      let contacts: Contact[];
-      contacts = this.storageService.getContacts();
-      contacts.push(new Contact(
-         this.contactForm.controls.firstName.value,
-         this.contactForm.controls.lastName.value,
-         this.contactForm.controls.email.value,
-         this.contactForm.controls.country.value
-      ));
-      this.storageService.setContacts(contacts);
+    if (!this.contactForm.valid) {
+      return;
     }
+    if (!this.contact) {
+      this.addNewContact();
+    }
+    else {
+      this.editContact();
+    }
+    this.location.back();
+  }
+
+  addNewContact(): void {
+    let contacts: Contact[];
+    contacts = this.storageService.getContacts();
+    contacts.push(new Contact(
+       this.contactForm.controls.firstName.value,
+       this.contactForm.controls.lastName.value,
+       this.contactForm.controls.email.value,
+       this.contactForm.controls.country.value
+    ));
+    this.storageService.setContacts(contacts);
+  }
+
+  editContact(): void {
+    let contacts: Contact[];
+    contacts = this.storageService.getContacts();
+    contacts.forEach((contact: Contact) => {
+      if (contact.id === this.contact.id) {
+        contact.firstName = this.contactForm.controls.firstName.value;
+        contact.lastName = this.contactForm.controls.lastName.value;
+        contact.email = this.contactForm.controls.email.value;
+        contact.country = this.contactForm.controls.country.value;
+      }
+    });
+    this.storageService.setContacts(contacts);
   }
 
 }
