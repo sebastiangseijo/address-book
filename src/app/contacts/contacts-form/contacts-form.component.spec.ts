@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ContactsFormComponent } from './contacts-form.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {NgSelectModule} from '@ng-select/ng-select';
+import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {ToastrModule} from 'ngx-toastr';
 
 describe('ContactsFormComponent', () => {
   let component: ContactsFormComponent;
@@ -8,7 +11,9 @@ describe('ContactsFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContactsFormComponent ]
+      declarations: [ ContactsFormComponent ],
+      imports: [ReactiveFormsModule, NgSelectModule, ToastrModule.forRoot()],
+      providers: [Location, { provide: LocationStrategy, useClass: PathLocationStrategy }]
     })
     .compileComponents();
   }));
