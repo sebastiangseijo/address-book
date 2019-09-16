@@ -4,6 +4,7 @@ import {Contact} from '../models/contact';
 import {StorageService} from '../services/storage.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Location} from '@angular/common';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-contacts-form',
@@ -17,7 +18,7 @@ export class ContactsFormComponent implements OnInit {
   countryList: string[] = [];
   contactForm: FormGroup;
 
-  constructor(private storageService: StorageService, private location: Location) {
+  constructor(private storageService: StorageService, private location: Location, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -25,7 +26,7 @@ export class ContactsFormComponent implements OnInit {
     this.contactForm = new FormGroup({
       firstName: new FormControl(this.contact ? this.contact.firstName : '', Validators.required),
       lastName: new FormControl(this.contact ? this.contact.lastName : '', Validators.required),
-      email: new FormControl(this.contact ? this.contact.email : '', Validators.required),
+      email: new FormControl(this.contact ? this.contact.email : '', [Validators.required, Validators.email]),
       country: new FormControl(this.contact ? this.contact.country : '', Validators.required)
     });
   }
@@ -40,6 +41,7 @@ export class ContactsFormComponent implements OnInit {
     else {
       this.editContact();
     }
+    this.showSuccess();
     this.location.back();
   }
 
@@ -79,6 +81,12 @@ export class ContactsFormComponent implements OnInit {
 
   getComposedName(): string {
     return this.contact ? this.contact.firstName + ' ' + this.contact.lastName : '';
+  }
+
+  showSuccess() {
+    this.toastr.success('Operation done correctly.', 'Success!', {
+      positionClass: 'toast-top-center'
+    });
   }
 
 }
