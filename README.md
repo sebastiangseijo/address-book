@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 For a live demo deployed on heroku navigate to:
 
- https://gig-address-book.herokuapp.com/
+https://gig-test.herokuapp.com/
 
 ## Development server
 
