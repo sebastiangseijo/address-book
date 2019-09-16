@@ -1,0 +1,18 @@
+.contacts-list {
+   margin-top: 5em;
+
+   .icon {
+      font-size: 1.5em;
+      margin-left: 0.5em;
+      margin-top: 0.5em;
+   }
+
+   .contact-row {
+      cursor: pointer;
+   }
+
+   .no-records-found {
+      font-weight: lighter;
+      text-align: center;
+   }
+}

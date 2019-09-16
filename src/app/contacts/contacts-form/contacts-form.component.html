@@ -1,0 +1,65 @@
+<div class="contacts-form">
+   <form  [formGroup]="contactForm" (ngSubmit)="submit()">
+      <div class="row">
+<!--         First Name       -->
+         <div class="col">
+            <label for="contact-first-name">First Name</label>
+            <input type="text" class="form-control" formControlName="firstName" name="firstName"
+                   id="contact-first-name" placeholder="First Name" required>
+         </div>
+         <!--         Last Name       -->
+         <div class="col">
+            <label for="contact-last-name">Last Name</label>
+            <input type="text" formControlName="lastName" class="form-control" name="lastName"
+                   id="contact-last-name" placeholder="Last Name" required>
+         </div>
+      </div>
+      <div class="row">
+         <!--         Email        -->
+         <div class="col">
+            <label for="contact-email">Email</label>
+            <input type="text" formControlName="email" name="email"
+                   class="form-control" id="contact-email" placeholder="Email" required>
+         </div>
+         <!--         Country        -->
+         <div class="col">
+            <label>Country</label>
+            <ng-select [items]="countryList"
+                       bindLabel="country"
+                       name="country"
+                       autofocus
+                       bindValue="id"
+                       formControlName="country">
+            </ng-select>
+         </div>
+      </div>
+      <div class="row">
+         <button type="button" [hidden]="!contact" data-toggle="modal" data-target="#removeContact"
+                 class="add-button btn btn-danger">Remove Contact</button>
+         <button type="submit" [disabled]="!contactForm.valid" class="add-button btn btn-success">Submit</button>
+      </div>
+   </form>
+
+
+   <!-- Modal -->
+   <div class="modal fade" id="removeContact" tabindex="-1" role="dialog" aria-labelledby="removeContactLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="removeContactLabel">Contact Deletion</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <strong>Are you sure you want to delete {{getComposedName()}} contact profile?</strong>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="button" (click)="removeContact()" data-dismiss="modal" class="btn btn-primary">Save changes</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+</div>
