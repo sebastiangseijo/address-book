@@ -76,6 +76,7 @@ export class ContactsFormComponent implements OnInit {
     contacts = this.storageService.getContacts();
     contacts  = contacts.filter(contact => contact.id !== this.contact.id);
     this.storageService.setContacts(contacts);
+    this.showSuccess();
     this.location.back();
   }
 

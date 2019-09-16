@@ -5,7 +5,7 @@ import {ContactsAddComponent} from './contacts/contacts-add/contacts-add.compone
 import {ContactsEditComponent} from './contacts/contacts-edit/contacts-edit.component';
 
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '',
     component: ContactsViewComponent
   },
