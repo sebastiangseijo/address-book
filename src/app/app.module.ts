@@ -10,6 +10,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {StorageService} from './contacts/services/storage.service';
 import { ContactsEditComponent } from './contacts/contacts-edit/contacts-edit.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { ContactsEditComponent } from './contacts/contacts-edit/contacts-edit.co
     BrowserModule,
     ReactiveFormsModule,
     NgSelectModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     AppRoutingModule
   ],
   providers: [StorageService],
